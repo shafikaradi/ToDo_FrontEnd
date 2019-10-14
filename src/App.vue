@@ -1,23 +1,34 @@
 <template>
   <div id="app">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-          <router-link class="nav-item nav-link active" to="/">Home</router-link>
-          <router-link class="nav-item nav-link" to="/ToDoList">To Do List</router-link>
-        </div>
-      </div>
-    </nav>
+    <div v-if="logOut"  >
+             <Login />
+            
+    </div>
 
-    <router-view :tasks="items" />
+    <div v-else>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <router-link class="nav-item nav-link active" to="/">Home</router-link>
+            <router-link class="nav-item nav-link" to="/ToDoList">To Do List</router-link>
+          </div>
+        </div>
+      </nav>
+
+      <router-view :tasks="items" />
+    </div>
   </div>
 </template>
 
 <script>
+import Login from "./components/Login.vue";
 export default {
+  
   name: "app",
+  components:{Login},
   data() {
     return {
+      logOut: true,
       pass: { header: "Table of fetched contents" },
       headerTitle: "Tasks to do",
       items: [],
